@@ -1,5 +1,11 @@
 .Img {
     margin-top: $h-gutter-sm;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        height: 90vh;
+        width: auto;
+    }
 }
 
 .Img--responsive {
