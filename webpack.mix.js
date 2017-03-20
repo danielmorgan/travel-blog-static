@@ -11,8 +11,8 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js');
-mix.sass('resources/assets/sass/app.scss', 'public/css')
+mix.js('src/js/app.js', 'dist/js');
+mix.sass('src/sass/app.scss', 'dist/css')
 
 if (! mix.config.inProduction) {
     mix.sourceMaps();
