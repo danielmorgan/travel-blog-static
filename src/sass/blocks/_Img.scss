@@ -1,0 +1,24 @@
+.Img {
+    margin-top: $h-gutter-sm;
+}
+
+.Img--responsive {
+    width: 100%;
+    height: auto;
+}
+
+.Gallery {
+    width: 100%;
+
+    @media (min-width: $break-md) {
+        width: 100%;
+    }
+
+    @media (min-width: $break-lg) {
+        width: 100%;
+    }
+
+    @media (min-width: $break-xl) {
+        width: 115%;
+    }
+}

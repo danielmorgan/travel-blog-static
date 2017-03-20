@@ -1,0 +1,68 @@
+.Blog {
+    position: relative;
+    z-index: $z-foreground;
+    top: 0;
+    left: 0;
+    height: 100%;
+    margin-top:  $h-gutter-sm;
+
+    @media (min-width: $break-md) {
+        margin-top: $h-gutter-md;
+    }
+
+    @media (min-width: $break-lg) {
+        margin-top: $h-gutter-lg;
+    }
+
+    @media (min-width: $break-xl) {
+        margin-top: $h-gutter-xl;
+    }
+}
+
+
+.Post {
+    max-width: $content-width-sm;
+    padding: 0 $gutter-sm;
+
+    @media (min-width: $break-md) {
+        max-width: $content-width-md;
+        padding: 0 $gutter-md;
+    }
+
+    @media (min-width: $break-lg) {
+        max-width: $content-width-lg;
+        padding: 0 $gutter-lg;
+    }
+
+    @media (min-width: $break-xl) {
+        max-width: $content-width-xl;
+        padding: 0 $gutter-xl;
+    }
+}
+
+
+.BlogBackground {
+    position: fixed;
+    z-index: $z-midground;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $content-width-sm;
+    padding: 0 $gutter-sm;
+    background-color: $bg-color;
+
+    @media (min-width: $break-md) {
+        width: $content-width-md;
+        padding: 0 $gutter-md;
+    }
+
+    @media (min-width: $break-lg) {
+        width: $content-width-lg;
+        padding: 0 $gutter-lg;
+    }
+
+    @media (min-width: $break-xl) {
+        width: $content-width-xl;
+        padding: 0 $gutter-xl;
+    }
+}

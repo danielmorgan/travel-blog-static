@@ -1,0 +1,46 @@
+.MapContainer {
+    display: none;
+    position: fixed;
+    z-index: $z-background;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: $break-md) {
+        display: block;
+        width: calc(100% - #{$content-width-md} - #{$gutter-md}*2);
+    }
+
+    @media (min-width: $break-lg) {
+        width: calc(100% - #{$content-width-lg} - #{$gutter-lg}*2);
+    }
+
+    @media (min-width: $break-xl) {
+        width: calc(100% - #{$content-width-xl} - #{$gutter-xl}*2);
+    }
+}
+
+.Map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $z-midground;
+
+        @media (min-width: $break-md) {
+            //background-image: linear-gradient(90deg, $bg-color 50%, transparentize($bg-color, 1) 100%);
+        }
+    }
+}
