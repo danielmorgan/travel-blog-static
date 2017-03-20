@@ -11,8 +11,6 @@ const fixture = require('./fixtures/walk-around-the-block');
 const fixtureWithoutElevation = removeElevationFromCoordinates(fixture);
 const start = fixtureWithoutElevation.features[0].geometry.coordinates[0];
 window.map.panTo(start);
-// window.map.addLayer(lineLayer(fixtureWithoutElevation, '#ffff00', 6));
-const emptyGeojson = require('./fixtures/empty')(start);
 
 
 // Pre-process
@@ -27,38 +25,27 @@ const fixtureTidied = geojsonTidy.tidy(fixtureWithoutElevation, {
 const geocoderRequests = fixtureTidied.features.map(f => axios.post(geocoderUrl, f));
 
 
-console.log('fixture                ', fixture);
-console.log('fixtureWithoutElevation', fixtureWithoutElevation);
-console.log('geocoderInput          ', fixtureTidied);
-
-
 // Get all geocoder responses and draw them on the map
 axios.all(geocoderRequests).then(responses => {
-    const geojson = geocoderResponsesToGeojson(responses);
-    console.log('geocoderOutput         ', geojson);
-
-    let animatedGeojson = emptyGeojson;
+    const geocodedGeojson = geocoderResponsesToGeojson(responses);
+    let animatedGeojson = require('./fixtures/empty')(start);
     window.map.addSource('line-animation', { type: 'geojson', data: animatedGeojson });
     setupLineAnimationLayers();
 
-    document.addEventListener('scroll', scroll);
-    function scroll() {
-        const y = window.pageYOffset;
-        const vh = document.documentElement.clientHeight;
-        const dh = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
-        const n = y / (dh - vh); // Normalized scroll position from 0 - 1
+    document.addEventListener('scroll', () => {
+        const maxIndex = Math.floor(geocodedGeojson.features[0].geometry.coordinates.length * getNormalizedScrollPosition());
+        if (maxIndex > 0) {
+            animatedGeojson.features[0].geometry.coordinates = geocodedGeojson.features[0].geometry.coordinates.slice(0, maxIndex);
+            window.map.getSource('line-animation').setData(animatedGeojson);
+        }
 
-        const maxIndex = Math.floor(geojson.features[0].geometry.coordinates.length * n);
-        animatedGeojson.features[0].geometry.coordinates = geojson.features[0].geometry.coordinates.slice(0, maxIndex);
-        window.map.getSource('line-animation').setData(animatedGeojson);
-        window.map.panTo(animatedGeojson.features[0].geometry.coordinates[animatedGeojson.features[0].geometry.coordinates.length - 1]);
-    }
+        const lastIndex = animatedGeojson.features[0].geometry.coordinates.length - 1;
+        const target = animatedGeojson.features[0].geometry.coordinates[lastIndex];
+        if (typeof target !== 'undefined') {
+            window.map.panTo(target);
+        }
+    });
 });
-
-
-
-
-
 
 
 
@@ -66,6 +53,13 @@ axios.all(geocoderRequests).then(responses => {
 /**
  * Utility functions
  */
+
+ function getNormalizedScrollPosition() {
+    const y = window.pageYOffset; // scroll position
+    const vh = document.documentElement.clientHeight; // viewport height
+    const dh = document.body.scrollHeight; // full page height
+    return y / (dh - vh); // Normalized scroll position from 0 - 1
+ }
 
 function removeElevationFromCoordinates(geojson) {
     const cleanFeatureCollection = [];
