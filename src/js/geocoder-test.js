@@ -103,7 +103,7 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#6e0600',
+            'line-color': '#3a3b8f',
             'line-width': 13,
             'line-opacity': 0.08
         }
@@ -117,7 +117,7 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#ff3819',
+            'line-color': '#2a66cd',
             'line-width': 11,
             'line-opacity': 0.15
         }
@@ -131,7 +131,7 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#f33f33',
+            'line-color': '#0089f4',
             'line-width': 6,
             'line-opacity': 0.9
         }
@@ -145,8 +145,8 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#ffb2a4',
-            'line-width': 1,
+            'line-color': '#a7d5ff',
+            'line-width': 0.5,
             'line-opacity': 0.9
         }
     });
