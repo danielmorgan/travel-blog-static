@@ -93,27 +93,21 @@ function geocoderResponsesToGeojson(responses, confidenceThreshold = 0) {
     };
 }
 
-function lineLayer(geojson, color = '#ffff00', width = 3, id = null) {
-    return {
-        'id': id ? id : String((new Date).getTime()),
+function setupLineAnimationLayers() {
+    window.map.addLayer({
+        'id': 'line-animation-bg-2',
         'type': 'line',
+        'source': 'line-animation',
         'layout': {
-            'line-join': 'round',
             'line-cap': 'round',
+            'line-join': 'round'
         },
         'paint': {
-            'line-color': color,
-            'line-width': width,
-            'line-opacity': 0.5
-        },
-        'source': {
-            'type': 'geojson',
-            'data': geojson
+            'line-color': '#6e0600',
+            'line-width': 13,
+            'line-opacity': 0.08
         }
-    };
-}
-
-function setupLineAnimationLayers() {
+    });
     window.map.addLayer({
         'id': 'line-animation-bg',
         'type': 'line',
@@ -123,9 +117,9 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#510bff',
-            'line-width': 9,
-            'line-opacity': 0.1
+            'line-color': '#ff3819',
+            'line-width': 11,
+            'line-opacity': 0.15
         }
     });
     window.map.addLayer({
@@ -137,9 +131,9 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#008eff',
-            'line-width': 4,
-            'line-opacity': 0.5
+            'line-color': '#f33f33',
+            'line-width': 6,
+            'line-opacity': 0.9
         }
     });
     window.map.addLayer({
@@ -151,9 +145,9 @@ function setupLineAnimationLayers() {
             'line-join': 'round'
         },
         'paint': {
-            'line-color': '#aceeff',
-            'line-width': 0.5,
-            'line-opacity': 0.7
+            'line-color': '#ffb2a4',
+            'line-width': 1,
+            'line-opacity': 0.9
         }
     });
 }
