@@ -20,7 +20,7 @@ $h-gutter-xl: 50px;
 
 $bg-color: white;
 $brand-primary: #0400ff;
-$heading-color: desaturate($brand-primary, 60%);
+$heading-color: $brand-primary;
 $text-color: #1f1f2a;
 
 $font-size-small: 14px;
